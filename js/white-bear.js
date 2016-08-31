@@ -6,41 +6,49 @@ var out = audioContext.destination;
 // load samples
 
 // play sound function (different for samples and synth?)
-function osc(freq, type, dest) {
+function osc(freq, type, dest, dtn) {
+	var duration = dtn;
+	var startTime = audioContext.currentTime;
+  	var endTime = startTime + duration;
 
-	var oscillator = audioContext.createOscillator()
+	var oscillator = audioContext.createOscillator();
 	oscillator.type = type;
 	oscillator.frequency.value = freq;
-	oscillator.connect(dest)
+	var ramp = audioContext.createGain()
+	ramp.gain.value = 0;
+	oscillator.connect(ramp);
+	ramp.connect(out);
 
-	oscillator.start(audioContext.currentTime)
-	oscillator.stop(audioContext.currentTime + 0.5)
+	oscillator.start(startTime);
+	ramp.gain.setTargetAtTime(1, startTime, 0.1);
+  	ramp.gain.setTargetAtTime(0, endTime, duration/2);
+	oscillator.stop(endTime + 2);
 }
 
 // setup sound banks
 function W(){
-	osc(440, 'sawtooth', out);
+	osc(440, 'sawtooth', out, 0.5);
 }
 function H(){
-	osc(387, 'sawtooth', out);
+	osc(387, 'sawtooth', out, 1);
 }
 function I(){
-	osc(248, 'sawtooth', out);
+	osc(248, 'sawtooth', out, 2);
 }
 function T(){
-	osc(392, 'sawtooth', out);
+	osc(392, 'sawtooth', out, 0.5);
 }
 function E(){
-	osc(222, 'sawtooth', out);
+	osc(222, 'sawtooth', out, 2);
 }
 function B(){
-	osc(187, 'sawtooth', out);
+	osc(187, 'sawtooth', out, 2.5);
 }
 function A(){
-	osc(489, 'sawtooth', out);
+	osc(489, 'sawtooth', out, 0.5);
 }
 function R(){
-	osc(500, 'sawtooth', out);
+	osc(500, 'sawtooth', out, 0.4);
 }
 // animations
 
