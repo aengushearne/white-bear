@@ -2,7 +2,9 @@ $(document).ready(function(){
 // setup audioContext
 var audioContext = new AudioContext()
 
-// play sound function (different for samples and synth)
+// load samples
+
+// play sound function (different for samples and synth?)
 function osc(freq) {
 
 	var oscillator = audioContext.createOscillator()
@@ -14,35 +16,58 @@ function osc(freq) {
 	oscillator.stop(audioContext.currentTime + 0.5)
 }
 
-// load samples
-// setup synth options
+// setup sound banks
+function W(){
+	osc(440);
+}
+function H(){
+	osc(387);
+}
+function I(){
+	osc(248);
+}
+function T(){
+	osc(392);
+}
+function E(){
+	osc(222);
+}
+function B(){
+	osc(187);
+}
+function A(){
+	osc(489);
+}
+function R(){
+	osc(500);
+}
 // animations
 
 // keybindings to trigger play functions
 $(document).keydown(function(e) {
  if (e.keyCode == 87) {              // "W" key
-  osc(440);
+  W(440);
  }
  else if (e.keyCode == 72) {              // "H" key
-  osc(387);
+  H(387);
  }
  else if (e.keyCode == 73) {              // "I" key
-  osc(248);
+  I(248);
  }
  else if (e.keyCode == 84) {              // "T" key
-  osc(392);
+  T(392);
  }
  else if (e.keyCode == 69) {              // "E" key
-  osc(222);
+  E(222);
  }
  else if (e.keyCode == 66) {              // "B" key
-  osc(187);
+  B(187);
  }
  else if (e.keyCode == 65) {              // "A" key
-  osc(489);
+  A(489);
  }
  else if (e.keyCode == 82) {              // "R" key
-  osc(500);
+  R(500);
  }
 });
 });
