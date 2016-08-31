@@ -2,15 +2,16 @@ $(document).ready(function(){
 // setup audioContext
 var audioContext = new AudioContext()
 
+var out = audioContext.destination;
 // load samples
 
 // play sound function (different for samples and synth?)
-function osc(freq, type) {
+function osc(freq, type, dest) {
 
 	var oscillator = audioContext.createOscillator()
 	oscillator.type = type;
 	oscillator.frequency.value = freq;
-	oscillator.connect(audioContext.destination)
+	oscillator.connect(dest)
 
 	oscillator.start(audioContext.currentTime)
 	oscillator.stop(audioContext.currentTime + 0.5)
@@ -18,28 +19,28 @@ function osc(freq, type) {
 
 // setup sound banks
 function W(){
-	osc(440, 'sawtooth');
+	osc(440, 'sawtooth', out);
 }
 function H(){
-	osc(387, 'sawtooth');
+	osc(387, 'sawtooth', out);
 }
 function I(){
-	osc(248, 'sawtooth');
+	osc(248, 'sawtooth', out);
 }
 function T(){
-	osc(392, 'sawtooth');
+	osc(392, 'sawtooth', out);
 }
 function E(){
-	osc(222, 'sawtooth');
+	osc(222, 'sawtooth', out);
 }
 function B(){
-	osc(187, 'sawtooth');
+	osc(187, 'sawtooth', out);
 }
 function A(){
-	osc(489, 'sawtooth');
+	osc(489, 'sawtooth', out);
 }
 function R(){
-	osc(500, 'sawtooth');
+	osc(500, 'sawtooth', out);
 }
 // animations
 
