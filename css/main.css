@@ -1,8 +1,8 @@
-#box {
-	margin-left: auto;
-}
 body {
 	background-color: grey;
+}
+#container {
+	margin-left: auto;
 }
 table {
 	margin-top:100px;
@@ -11,9 +11,11 @@ table {
 }
 td {
     border: 1px solid white;
-	padding: 30px;
 	color:white;
 	font-size: 26px;
+}
+.key{
+	padding: 30px;
 }
 #bear {
 	color:black;

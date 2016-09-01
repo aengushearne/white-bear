@@ -28,29 +28,40 @@ function osc(freq, type, dest, dtn) {
 // setup sound banks
 function W(){
 	osc(440, 'sawtooth', out, 0.5);
+	lightUp('w');
 }
 function H(){
 	osc(387, 'sawtooth', out, 1);
+	lightUp('h');
 }
 function I(){
 	osc(248, 'sine', out, 2);
+	lightUp('i');
 }
 function T(){
 	osc(392, 'sawtooth', out, 0.5);
+	lightUp('t');
 }
 function E(){
 	osc(222, 'sawtooth', out, 2);
+	lightUp('e');
 }
 function B(){
 	osc(187, 'sawtooth', out, 2.5);
+	lightUp('b');
 }
 function A(){
 	osc(489, 'sine', out, 0.5);
+	lightUp('a');
 }
 function R(){
 	osc(500, 'sawtooth', out, 0.4);
+	lightUp('r');
 }
 // animations
+function lightUp(box) {
+ $('#'+box).effect("highlight", {color: 'white'}, 500); 
+}
 
 // keybindings to trigger play functions
 $(document).keydown(function(e) {
