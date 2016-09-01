@@ -12,10 +12,11 @@ table {
 td {
     border: 1px solid white;
 	color:white;
-	font-size: 26px;
+	font-size: 30px;
+	font-family: 'Open Sans', sans-serif;
 }
 .key{
-	padding: 30px;
+	padding: 28px;
 }
 #bear {
 	color:black;
