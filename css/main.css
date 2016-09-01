@@ -1,0 +1,20 @@
+#box {
+	margin-left: auto;
+}
+body {
+	background-color: grey;
+}
+table {
+	margin-top:100px;
+	margin-left:auto; 
+    margin-right:auto;
+}
+td {
+    border: 1px solid white;
+	padding: 30px;
+	color:white;
+	font-size: 26px;
+}
+#bear {
+	color:black;
+}

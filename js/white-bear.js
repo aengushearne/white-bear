@@ -33,7 +33,7 @@ function H(){
 	osc(387, 'sawtooth', out, 1);
 }
 function I(){
-	osc(248, 'sawtooth', out, 2);
+	osc(248, 'sine', out, 2);
 }
 function T(){
 	osc(392, 'sawtooth', out, 0.5);
@@ -45,7 +45,7 @@ function B(){
 	osc(187, 'sawtooth', out, 2.5);
 }
 function A(){
-	osc(489, 'sawtooth', out, 0.5);
+	osc(489, 'sine', out, 0.5);
 }
 function R(){
 	osc(500, 'sawtooth', out, 0.4);
