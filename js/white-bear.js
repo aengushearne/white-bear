@@ -14,10 +14,42 @@ function osc(freq, type, dest, dtn) {
 	var oscillator = audioContext.createOscillator();
 	oscillator.type = type;
 	oscillator.frequency.value = freq;
+	// Master effects
+	// envelope
 	var ramp = audioContext.createGain()
 	ramp.gain.value = 0;
 	oscillator.connect(ramp);
-	ramp.connect(out);
+	// bandpass
+  	var bandpass = audioContext.createBiquadFilter()
+  	bandpass.type = 'bandpass';
+  	bandpass.frequency.value = 1200;
+  	bandpass.Q.value = 0.9;
+	// compressor
+	// overdrive
+	var shaper = audioContext.createWaveShaper()
+	shaper.curve = generateCurve(22050)
+
+	function generateCurve(steps){
+  		var curve = new Float32Array(steps)
+  		var deg = Math.PI / 180
+
+	  	for (var i=0;i<steps;i++) {
+    		var x = i * 2 / steps - 1
+    	curve[i] = (3 + 10) * x * 20 * deg / (Math.PI + 10 * Math.abs(x))
+  		}
+
+  		return curve
+}
+
+	var amp = audioContext.createGain()
+	amp.gain.value = 0.1;
+	ramp.connect(amp);
+	ramp.connect(bandpass);
+	amp.connect(bandpass);
+	bandpass.connect(shaper);
+	bandpass.connect(out);
+	shaper.connect(out);
+	// reverb --ToDo
 
 	oscillator.start(startTime);
 	ramp.gain.setTargetAtTime(1, startTime, 0.1);
@@ -28,6 +60,8 @@ function osc(freq, type, dest, dtn) {
 // setup sound banks
 function W(){
 	osc(440, 'sawtooth', out, 0.5);
+	osc(248, 'sine', out, 2);
+	osc(392, 'sawtooth', out, 0.5);
 	lightUp('w');
 }
 function H(){
