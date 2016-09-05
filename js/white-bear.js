@@ -14,7 +14,7 @@ function osc(freq, type, dest, dtn) {
 	var oscillator = audioContext.createOscillator();
 	oscillator.type = type;
 	oscillator.frequency.value = freq;
-	// Master effects
+	// *** Master effects ***
 	// envelope
 	var ramp = audioContext.createGain()
 	ramp.gain.value = 0;
@@ -100,28 +100,28 @@ function lightUp(box) {
 // keybindings to trigger play functions
 $(document).keydown(function(e) {
  if (e.keyCode == 87) {              // "W" key
-  W(440);
+  W();
  }
  else if (e.keyCode == 72) {              // "H" key
-  H(387);
+  H();
  }
  else if (e.keyCode == 73) {              // "I" key
-  I(248);
+  I();
  }
  else if (e.keyCode == 84) {              // "T" key
-  T(392);
+  T();
  }
  else if (e.keyCode == 69) {              // "E" key
-  E(222);
+  E();
  }
  else if (e.keyCode == 66) {              // "B" key
-  B(187);
+  B();
  }
  else if (e.keyCode == 65) {              // "A" key
-  A(489);
+  A();
  }
  else if (e.keyCode == 82) {              // "R" key
-  R(500);
+  R();
  }
 });
 });
