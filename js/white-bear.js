@@ -12,13 +12,14 @@ analyser.getByteTimeDomainData(dataArray);
 	// canvas
 	var canvas = document.getElementById("graph");
 	var canvasCtx = canvas.getContext("2d");
-	canvasCtx.clearRect(0, 0, 2000, 200);
+	$(canvasCtx.canvas).css("width", "100%");
+	canvasCtx.clearRect(0, 0, 2000, 300);
 	function draw() {
 		drawVisual = requestAnimationFrame(draw);
 		analyser.getByteTimeDomainData(dataArray);
 		canvasCtx.fillStyle = 'grey';
-      	canvasCtx.fillRect(0, 0, 2000, 200);
-      	canvasCtx.lineWidth = 1;
+      	canvasCtx.fillRect(0, 0, 2000, 300);
+      	canvasCtx.lineWidth = 1.5;
       	canvasCtx.strokeStyle = 'white';
 
       	canvasCtx.beginPath();
@@ -28,7 +29,7 @@ analyser.getByteTimeDomainData(dataArray);
       	for(var i = 0; i < bufferLength; i++) {
    
         var v = dataArray[i] / 128.0;
-        var y = v * 200/2;
+        var y = v * 300/2;
 
         if(i === 0) {
           canvasCtx.moveTo(x, y);
