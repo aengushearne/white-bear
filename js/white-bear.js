@@ -3,6 +3,45 @@ $(document).ready(function(){
 var audioContext = new AudioContext()
 
 var out = audioContext.destination;
+// *** analyser node for graphical display ***
+var analyser = audioContext.createAnalyser();
+analyser.fftSize = 2048;
+var bufferLength = analyser.frequencyBinCount;
+var dataArray = new Uint8Array(bufferLength);
+analyser.getByteTimeDomainData(dataArray);
+	// canvas
+	var canvas = document.getElementById("graph");
+	var canvasCtx = canvas.getContext("2d");
+	canvasCtx.clearRect(0, 0, 2000, 200);
+	function draw() {
+		drawVisual = requestAnimationFrame(draw);
+		analyser.getByteTimeDomainData(dataArray);
+		canvasCtx.fillStyle = 'grey';
+      	canvasCtx.fillRect(0, 0, 2000, 200);
+      	canvasCtx.lineWidth = 1;
+      	canvasCtx.strokeStyle = 'white';
+
+      	canvasCtx.beginPath();
+      	var sliceWidth = 2000 * 1.0 / bufferLength;
+      	var x = 0;
+
+      	for(var i = 0; i < bufferLength; i++) {
+   
+        var v = dataArray[i] / 128.0;
+        var y = v * 200/2;
+
+        if(i === 0) {
+          canvasCtx.moveTo(x, y);
+        } else {
+          canvasCtx.lineTo(x, y);
+        }
+
+        x += sliceWidth;
+      	}
+      	canvasCtx.lineTo(canvas.width, canvas.height/2);
+      	canvasCtx.stroke();
+    };
+    draw();
 // load samples
 
 // play sound function (different for samples and synth?)
@@ -49,6 +88,8 @@ function osc(freq, type, dest, dtn) {
 	bandpass.connect(shaper);
 	bandpass.connect(out);
 	shaper.connect(out);
+	// connect to analyser
+	shaper.connect(analyser);
 	// reverb --ToDo
 
 	oscillator.start(startTime);
@@ -94,7 +135,7 @@ function R(){
 }
 // animations
 function lightUp(box) {
- $('#'+box).effect("highlight", {color: 'white'}, 500); 
+ 		$('#'+box).effect("highlight", {color: 'white'}, 500); 
 }
 
 // keybindings to trigger play functions
