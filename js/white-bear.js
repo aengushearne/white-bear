@@ -5,10 +5,10 @@ var audioContext = new AudioContext()
 var out = audioContext.destination;
 // master volume control
 var volumeCh1 = audioContext.createGain()
-volumeCh1.gain.value = 0.01;
+volumeCh1.gain.value = 0.1;
 volumeCh1.connect(out);
 var volumeCh2 = audioContext.createGain()
-volumeCh2.gain.value = 0.7;
+volumeCh2.gain.value = 0.5;
 volumeCh2.connect(out);
 // *** analyser node for graphical display ***
 var analyser = audioContext.createAnalyser();
