@@ -3,6 +3,13 @@ $(document).ready(function(){
 var audioContext = new AudioContext()
 
 var out = audioContext.destination;
+// master volume control
+var volumeCh1 = audioContext.createGain()
+volumeCh1.gain.value = 0.01;
+volumeCh1.connect(out);
+var volumeCh2 = audioContext.createGain()
+volumeCh2.gain.value = 0.7;
+volumeCh2.connect(out);
 // *** analyser node for graphical display ***
 var analyser = audioContext.createAnalyser();
 analyser.fftSize = 2048;
@@ -43,7 +50,7 @@ analyser.getByteTimeDomainData(dataArray);
       	canvasCtx.stroke();
     };
     draw();
-// load samples
+// load samples --ToDo
 
 // play sound function (different for samples and synth?)
 function osc(freq, type, dest, dtn) {
@@ -64,7 +71,7 @@ function osc(freq, type, dest, dtn) {
   	bandpass.type = 'bandpass';
   	bandpass.frequency.value = 1200;
   	bandpass.Q.value = 0.9;
-	// compressor
+	// compressor --ToDo
 	// overdrive
 	var shaper = audioContext.createWaveShaper()
 	shaper.curve = generateCurve(22050)
@@ -87,8 +94,8 @@ function osc(freq, type, dest, dtn) {
 	ramp.connect(bandpass);
 	amp.connect(bandpass);
 	bandpass.connect(shaper);
-	bandpass.connect(out);
-	shaper.connect(out);
+	bandpass.connect(volumeCh1);
+	shaper.connect(volumeCh2);
 	// connect to analyser
 	shaper.connect(analyser);
 	// reverb --ToDo
