@@ -53,7 +53,7 @@ analyser.getByteTimeDomainData(dataArray);
 // load samples --ToDo
 
 // play sound function (different for samples and synth?)
-function osc(freq, type, dest, dtn) {
+function osc(freq, type, dtn) {
 	var duration = dtn;
 	var startTime = audioContext.currentTime;
   	var endTime = startTime + duration;
@@ -108,37 +108,37 @@ function osc(freq, type, dest, dtn) {
 
 // setup sound banks
 function W(){
-	osc(440, 'sawtooth', out, 0.5);
-	osc(248, 'sine', out, 2);
-	osc(392, 'sawtooth', out, 0.5);
+	osc(440, 'sawtooth', 0.5);
+	osc(248, 'sine', 2);
+	osc(392, 'sawtooth', 0.5);
 	lightUp('w');
 }
 function H(){
-	osc(387, 'sawtooth', out, 1);
+	osc(387, 'sawtooth', 1);
 	lightUp('h');
 }
 function I(){
-	osc(248, 'sine', out, 2);
+	osc(248, 'sine', 2);
 	lightUp('i');
 }
 function T(){
-	osc(392, 'sawtooth', out, 0.5);
+	osc(392, 'sawtooth', 0.5);
 	lightUp('t');
 }
 function E(){
-	osc(222, 'sawtooth', out, 2);
+	osc(222, 'sawtooth', 2);
 	lightUp('e');
 }
 function B(){
-	osc(187, 'sawtooth', out, 2.5);
+	osc(187, 'sawtooth', 2.5);
 	lightUp('b');
 }
 function A(){
-	osc(489, 'sine', out, 0.5);
+	osc(489, 'sine', 0.5);
 	lightUp('a');
 }
 function R(){
-	osc(500, 'sawtooth', out, 0.4);
+	osc(500, 'sawtooth', 0.4);
 	lightUp('r');
 }
 // animations
